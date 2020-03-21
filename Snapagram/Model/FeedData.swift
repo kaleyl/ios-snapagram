@@ -17,12 +17,15 @@ import FirebaseDatabase
 // Create global instance of the feed
 var feed = FeedData()
 //firebase
+let db = Firestore.firestore()
 var dbRef: DatabaseReference = Database.database().reference()
+var storage: Storage = Storage.storage()
 
 class Thread {
     var name: String
     var emoji: String
     var entries: [ThreadEntry]
+    var entriesID = [String]()
     
     init(name: String, emoji: String) {
         self.name = name
@@ -32,10 +35,34 @@ class Thread {
     
     func addEntry(threadEntry: ThreadEntry) {
         entries.append(threadEntry)
+        
+        let imageID = UUID.init().uuidString
+        let storageRef = storage.reference(withPath: "entries/\(imageID).jpg")
+        guard let imageData = threadEntry.image.jpegData(compressionQuality: 0.75) else { return }
+        let uploadMetadata = StorageMetadata.init()
+        uploadMetadata.contentType = "image/jpeg"
+        storageRef.putData(imageData)
+
+        var ref: DocumentReference? = nil
+        ref = db.collection("threads").document("\(self.name)").collection("entries").addDocument(data:
+            [ "image" : imageID ])
+        { err in
+               if let err  = err {
+               print("Error adding document: \(err)")
+           } else {
+                self.entriesID.append(ref!.documentID)
+               print("Document added with ID: \(ref!.documentID)")
+           }
+        }
+    
     }
+    
     
     func removeFirstEntry() -> ThreadEntry? {
         if entries.count > 0 {
+            let firEntry = entriesID[0]
+            db.collection("threads").document("\(self.name)").collection("entries").document(firEntry).delete()
+            entriesID.removeFirst()
             return entries.removeFirst()
         }
         return nil
@@ -80,50 +107,106 @@ class FeedData {
         Post(location: "Soda Hall", image: UIImage(named: "soda"), user: "chromadrive", caption: "Find your happy place 💻", date: Date())
     ]
     
+    
     // Adds dummy data to each thread
     init() {
+        self.username = "kaleyi"
+
         for thread in threads {
             let entry = ThreadEntry(username: self.username, image: UIImage(named: "garbers")!)
             thread.addEntry(threadEntry: entry)
             threadNames.append(thread.name)
-            images.add(image: UIImage(named: "garbers")!, timestamp: Date())
         }
+        
     }
     
     func addPost(post: Post) {
         posts.append(post)
         
-        //add post to DataBase
-        guard let key = dbRef.child("posts").childByAutoId().key else { return }
-        
-        let post = ["location": post.location,
-                    "username": feed.username,
-                    "caption": post.caption,
-            ] as [String : Any]
-        
-        let childUpdates = ["/posts/\(key)": post]
-        dbRef.updateChildValues(childUpdates)
+        let imageID = UUID.init().uuidString
+        let dbtimeStamp = Timestamp(date: post.date)
+
+        let storageRef = storage.reference(withPath: "posts/\(imageID).jpg")
+        guard let imageData = post.image!.jpegData(compressionQuality: 0.75) else { return }
+        let uploadMetadata = StorageMetadata.init()
+        uploadMetadata.contentType = "image/jpeg"
+        storageRef.putData(imageData)
+
+        var ref: DocumentReference? = nil
+        ref = db.collection("posts").addDocument(data:
+            [   "date" : dbtimeStamp,
+                        "location": post.location,
+                         "pathToImage": imageID,
+                         "username": username,
+                         "caption": post.caption,
+            ]) { err in
+                if let err  = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
     }
-    
-    
-    
+
     
     func fetchPost(){
-        let imageData = images.dataFor(index: (images.images.count - 1)).image
-        let date = images.dataFor(index: (images.images.count - 1)).timestamp
+        db.collection("posts").getDocuments(){ (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let location = document.data()["location"] as! String
+                    let username = document.data()["username"] as! String
+                    let imageID = document.data()["pathToImage"] as! String
+                    let caption = document.data()["caption"] as! String
+                    let timeStamp = document.data()["date"] as! Timestamp
 
-        let refHandle = dbRef.observe(DataEventType.value, with: { (snapshot) in
-          let postDict = snapshot.value as? [String : AnyObject] ?? [:]
-            self.posts.append( Post(location: postDict["location"] as! String, image: imageData
-                , user: postDict["username"] as! String, caption: postDict["caption"] as! String, date: date
-            ))
-        })
+                    let date = Date(timeIntervalSince1970: TimeInterval(timeStamp.seconds))
+
+                    let storageRef = storage.reference(withPath: "posts/\(imageID).jpg")
+
+                    storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
+                        if error != nil {
+                            print("error")
+                        }
+                        if let data = data {
+                            let image = UIImage(data: data)
+                            print(image!)
+                            images.images.append(ImageData(image: image!, timestamp: date))
+                            print(images.numImages())
+
+                            let newPost = Post(location: location, image: image, user: username, caption: caption, date: date)
+                            
+                            self.posts.append(newPost)
+                            print(self.posts.count)
+                            
+                        }
+                    }
+                }
+
+            }
+        }
+
     }
+    
+    
+    
     
     // Optional: Implement adding new threads!
     func addThread(thread: Thread) {
         threads.append(thread)
         threadNames.append(thread.name)
+        var ref: DocumentReference? = nil
+        ref = db.collection("threads").document("\(thread.name)").collection("info").addDocument(data:
+            [   "name" : thread.name,
+                "emoji": thread.emoji
+          ]) { err in
+              if let err  = err {
+              print("Error adding document: \(err)")
+          } else {
+              print("Document added with ID: \(ref!.documentID)")
+          }
+      }
     }
     
 }

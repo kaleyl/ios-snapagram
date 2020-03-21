@@ -30,11 +30,15 @@ class CameraViewController: UIViewController {
         self.imagePickerController = UIImagePickerController()
         self.imagePickerController.delegate = self
         self.imagePickerController.sourceType = .photoLibrary
+        postButton.isHidden = true
         setUp()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        postButton.isHidden = true
+    }
+    
     func setUp() -> Void {
-        postButton.alpha = 0
         
         photoLibraryButton.backgroundColor = Constants.snapagramBlue
         photoLibraryButton.titleLabel?.textColor = UIColor.systemYellow
@@ -71,8 +75,7 @@ extension CameraViewController: UINavigationControllerDelegate, UIImagePickerCon
             let currTime = Date()
             images.add(image: image, timestamp: currTime)
             previewImage.image = image
-            //postButton.isHidden = false
-            postButton.alpha = 1
+            postButton.isHidden = false
         }
         imagePickerController.dismiss(animated: true, completion: nil)
     }

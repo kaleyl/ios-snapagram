@@ -14,7 +14,10 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
     @IBOutlet var postTableView: UITableView!
         
     override func viewDidLoad() {
+        
         super.viewDidLoad()
+        
+        //Firebase: Read from database function call
         
         threadCollectionView.delegate = self
         threadCollectionView.dataSource = self
@@ -22,12 +25,12 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
         postTableView.delegate = self
         postTableView.dataSource = self
         
-        //Firebase: Read from database function call
-        images.fetch()
-        //feed.fetchPost()
+        viewWillAppear(false)
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        feed.fetchPost()
         threadCollectionView.reloadData()
         postTableView.reloadData()
     }

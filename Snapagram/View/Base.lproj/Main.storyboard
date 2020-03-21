@@ -257,10 +257,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="haR-Gz-OOm">
-                                <rect key="frame" x="55" y="673" width="304" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="CKz-aC-GRf"/>
-                                </constraints>
+                                <rect key="frame" x="55" y="686" width="304" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Take Photo 📸">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -270,10 +267,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gK3-U3-rLB">
-                                <rect key="frame" x="55" y="743" width="304" height="35"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="1Jw-lS-dur"/>
-                                </constraints>
+                                <rect key="frame" x="55" y="742" width="304" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Choose from Photo Library">
                                     <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -283,16 +277,15 @@
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="osD-8b-kvX">
-                                <rect key="frame" x="55" y="108" width="304" height="475"/>
+                                <rect key="frame" x="55" y="108" width="304" height="498"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzU-v8-ZGM">
-                                <rect key="frame" x="184.5" y="608" width="45" height="35"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PzU-v8-ZGM">
+                                <rect key="frame" x="179.5" y="616" width="55" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="7oK-rl-5Rg"/>
-                                    <constraint firstAttribute="width" constant="45" id="yT2-kg-UgI"/>
+                                    <constraint firstAttribute="width" constant="55" id="k2w-VG-Ek3"/>
+                                    <constraint firstAttribute="height" constant="55" id="vjz-vf-t8E"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Post!"/>
+                                <state key="normal" title="Post!" image="snapagram_logo"/>
                                 <connections>
                                     <action selector="postButtonPressed:" destination="qJC-UZ-mXh" eventType="touchUpInside" id="a5E-wb-nYp"/>
                                 </connections>
@@ -301,17 +294,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="osD-8b-kvX" firstAttribute="leading" secondItem="haR-Gz-OOm" secondAttribute="leading" id="7jm-C5-jmk"/>
+                            <constraint firstItem="PzU-v8-ZGM" firstAttribute="top" secondItem="osD-8b-kvX" secondAttribute="bottom" constant="10" id="EIM-El-VQD"/>
+                            <constraint firstItem="haR-Gz-OOm" firstAttribute="top" secondItem="PzU-v8-ZGM" secondAttribute="bottom" constant="15" id="Ftb-Lm-RJf"/>
                             <constraint firstItem="osD-8b-kvX" firstAttribute="top" secondItem="OBZ-bv-j3x" secondAttribute="top" constant="20" id="Fzk-Y3-Gol"/>
                             <constraint firstItem="osD-8b-kvX" firstAttribute="trailing" secondItem="haR-Gz-OOm" secondAttribute="trailing" id="G1X-F0-gTx"/>
-                            <constraint firstItem="haR-Gz-OOm" firstAttribute="top" secondItem="PzU-v8-ZGM" secondAttribute="bottom" constant="30" id="Mcf-B8-Cr5"/>
-                            <constraint firstItem="PzU-v8-ZGM" firstAttribute="top" secondItem="osD-8b-kvX" secondAttribute="bottom" constant="25" id="Rjz-7L-B4a"/>
+                            <constraint firstItem="PzU-v8-ZGM" firstAttribute="centerX" secondItem="rUl-t9-NKW" secondAttribute="centerX" id="I4m-ZU-80m"/>
+                            <constraint firstItem="PzU-v8-ZGM" firstAttribute="top" secondItem="osD-8b-kvX" secondAttribute="bottom" constant="10" id="PKQ-20-zTW"/>
                             <constraint firstItem="OBZ-bv-j3x" firstAttribute="bottom" secondItem="gK3-U3-rLB" secondAttribute="bottom" constant="35" id="SGI-Of-gUJ"/>
                             <constraint firstItem="gK3-U3-rLB" firstAttribute="leading" secondItem="OBZ-bv-j3x" secondAttribute="leading" constant="55" id="UFT-Uj-anp"/>
-                            <constraint firstItem="gK3-U3-rLB" firstAttribute="top" secondItem="haR-Gz-OOm" secondAttribute="bottom" constant="35" id="anS-XM-xZb"/>
+                            <constraint firstItem="osD-8b-kvX" firstAttribute="centerX" secondItem="PzU-v8-ZGM" secondAttribute="centerX" id="aFf-eI-HaQ"/>
+                            <constraint firstItem="gK3-U3-rLB" firstAttribute="top" secondItem="haR-Gz-OOm" secondAttribute="bottom" constant="20" id="d20-Wd-lGi"/>
                             <constraint firstItem="OBZ-bv-j3x" firstAttribute="trailing" secondItem="haR-Gz-OOm" secondAttribute="trailing" constant="55" id="e0W-CH-1D0"/>
                             <constraint firstItem="haR-Gz-OOm" firstAttribute="leading" secondItem="OBZ-bv-j3x" secondAttribute="leading" constant="55" id="eC0-sY-ved"/>
                             <constraint firstItem="OBZ-bv-j3x" firstAttribute="trailing" secondItem="gK3-U3-rLB" secondAttribute="trailing" constant="55" id="pGa-Au-G8r"/>
-                            <constraint firstItem="PzU-v8-ZGM" firstAttribute="centerX" secondItem="rUl-t9-NKW" secondAttribute="centerX" id="zQI-bx-Je6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OBZ-bv-j3x"/>
                     </view>
@@ -355,13 +350,14 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbB-9Y-ZK1">
-                                <rect key="frame" x="310" y="770" width="84" height="42"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dbB-9Y-ZK1">
+                                <rect key="frame" x="339" y="757" width="55" height="55"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="dbB-9Y-ZK1" secondAttribute="height" multiplier="2:1" id="eo1-4f-4Ta"/>
+                                    <constraint firstAttribute="height" constant="55" id="3fM-cT-dLx"/>
+                                    <constraint firstAttribute="width" constant="55" id="Nf8-US-a6y"/>
+                                    <constraint firstAttribute="width" secondItem="dbB-9Y-ZK1" secondAttribute="height" multiplier="1:1" id="eo1-4f-4Ta"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="Post"/>
+                                <state key="normal" image="snapagram_logo"/>
                                 <connections>
                                     <action selector="postButtonPressed:" destination="3wQ-Ib-xCX" eventType="touchUpInside" id="2Ra-jp-S7K"/>
                                 </connections>
@@ -373,7 +369,7 @@
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
                             </textField>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MhE-lp-baF">
-                                <rect key="frame" x="50" y="568" width="314" height="157"/>
+                                <rect key="frame" x="50" y="568" width="314" height="144"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3y7-Mw-2LS">
                                 <rect key="frame" x="75" y="291" width="264" height="44"/>
@@ -520,5 +516,6 @@
         <image name="bolt.fill" catalog="system" width="50" height="64"/>
         <image name="circle.grid.hex.fill" catalog="system" width="64" height="56"/>
         <image name="skyline" width="800" height="533"/>
+        <image name="snapagram_logo" width="1063" height="1063"/>
     </resources>
 </document>

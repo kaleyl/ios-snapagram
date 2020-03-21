@@ -8,7 +8,6 @@
 
 import UIKit
 import Firebase
-import FirebaseDatabase
 
 class PostViewController: UIViewController, UITextFieldDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -102,8 +101,10 @@ class PostViewController: UIViewController, UITextFieldDelegate, UICollectionVie
         let location: String = locationField.text ?? ""
         let newPost = Post(location: location, image: images.dataFor(index: (images.images.count - 1)).image, user: feed.username, caption: caption, date: Date())
         feed.addPost(post: newPost)
+        
         //reload view
         self.imagePreview.image = nil
+        
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -147,10 +148,11 @@ class PostViewController: UIViewController, UITextFieldDelegate, UICollectionVie
             if (feed.threadNames.contains(threadName!)) {
                 self.presentAlertViewController(title: "Opps", message: "The thread already exists!")
             }
-            
-            let newThread = Thread(name: threadName!, emoji: threadEmoji!)
-            feed.addThread(thread: newThread)
-            self.viewWillAppear(false)
+            else {
+                let newThread = Thread(name: threadName!, emoji: threadEmoji!)
+                feed.addThread(thread: newThread)
+                self.viewWillAppear(false)
+            }
         })
         
         let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })

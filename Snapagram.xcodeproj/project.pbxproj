@@ -23,7 +23,7 @@
 		B0CD011D24178743008EFC00 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0CD011C24178743008EFC00 /* PreviewViewController.swift */; };
 		DF1F599224238AB3002503BC /* ImagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1F599124238AB3002503BC /* ImagesModel.swift */; };
 		DF4676E82423906600770DFD /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4676E72423906600770DFD /* PostViewController.swift */; };
-		DF4676F42424486D00770DFD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DF4676F32424486D00770DFD /* GoogleService-Info.plist */; };
+		DFD401682425AA37009B3A49 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DFD401672425AA37009B3A49 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +46,7 @@
 		C09D3931915A36368CECFFA3 /* Pods-Snapagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snapagram.debug.xcconfig"; path = "Target Support Files/Pods-Snapagram/Pods-Snapagram.debug.xcconfig"; sourceTree = "<group>"; };
 		DF1F599124238AB3002503BC /* ImagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesModel.swift; sourceTree = "<group>"; };
 		DF4676E72423906600770DFD /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		DF4676F32424486D00770DFD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DFD401672425AA37009B3A49 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F98429234FFDF025829BD48C /* Pods-Snapagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Snapagram.release.xcconfig"; path = "Target Support Files/Pods-Snapagram/Pods-Snapagram.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,7 +116,7 @@
 				A23812642415AEBB008E0F6C /* View Controllers */,
 				A23812572415A9F5008E0F6C /* Assets.xcassets */,
 				A23812592415A9F5008E0F6C /* LaunchScreen.storyboard */,
-				DF4676F32424486D00770DFD /* GoogleService-Info.plist */,
+				DFD401672425AA37009B3A49 /* GoogleService-Info.plist */,
 				A238125C2415A9F5008E0F6C /* Info.plist */,
 			);
 			path = Snapagram;
@@ -222,7 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A238125B2415A9F5008E0F6C /* LaunchScreen.storyboard in Resources */,
-				DF4676F42424486D00770DFD /* GoogleService-Info.plist in Resources */,
+				DFD401682425AA37009B3A49 /* GoogleService-Info.plist in Resources */,
 				A23812582415A9F5008E0F6C /* Assets.xcassets in Resources */,
 				A23812562415A9EF008E0F6C /* Main.storyboard in Resources */,
 			);
@@ -380,7 +380,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.cyl.Snapagram;
+				PRODUCT_BUNDLE_IDENTIFIER = com.cycyi.Snapagram;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

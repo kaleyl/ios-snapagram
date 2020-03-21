@@ -12,9 +12,7 @@ import Firebase
 import FirebaseFirestore
 import FirebaseStorage
 
-
 var images = Images()
-
 
 struct ImageData {
     let image: UIImage
@@ -22,9 +20,11 @@ struct ImageData {
 }
 
 class Images {
-    var images: [ImageData] = []
     let db = Firestore.firestore()
-    let storage = Storage.storage()
+    var dbRef: DatabaseReference = Database.database().reference()
+    var storage: Storage = Storage.storage()
+    
+    var images: [ImageData] = []
     
     func numImages() -> Int {
            return images.count
@@ -35,20 +35,46 @@ class Images {
     }
     
     
+    
+    func add(image: UIImage, timestamp: Date) {
+        images.append(ImageData(image: image, timestamp: timestamp))
+        
+        // "images" -> unique image id, timestamp
+        let imageID = UUID.init().uuidString
+        let dbtimeStammp = Timestamp(date: timestamp)
+
+        let storageRef = storage.reference(withPath: "images/\(imageID).jpg")
+        guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
+        let uploadMetadata = StorageMetadata.init()
+        uploadMetadata.contentType = "image/jpeg"
+        storageRef.putData(imageData)
+
+        var ref: DocumentReference? = nil
+        ref = db.collection("images").addDocument(data: ["image": imageID, "timestamp": dbtimeStammp]) {
+            err in
+            if let err  = err {
+                print("Error adding document: \(err)")
+            } else {
+                print("Document added with ID: \(ref!.documentID)")
+            }
+        }
+    }
+    
+    
     //Firebase Operations
-    func fetch(){
+    func fetch() {
         db.collection("images").getDocuments(){ (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
-            
+
                 for document in querySnapshot!.documents {
                     let imageID = document.data()["image"] as! String
                     let timeStamp = document.data()["timestamp"] as! Timestamp
-                    
+
                     let date = Date(timeIntervalSince1970: TimeInterval(timeStamp.seconds))
                     let storageRef = self.storage.reference(withPath: "images/\(imageID).jpg")
-                    
+
                     storageRef.getData(maxSize: 4 * 1024 * 1024) { (data, error) in
                         if error != nil {
                             print("error")
@@ -61,34 +87,10 @@ class Images {
                         }
                     }
                 }
+                
             }
         }
     }
+
     
-    
-    func add(image: UIImage, timestamp: Date){
-        images.append(ImageData(image: image, timestamp: timestamp))
-        
-        // "images" -> unique image id, timestamp
-        let imageID = UUID.init().uuidString
-        let dbtimeStammp = Timestamp(date: timestamp)
-        
-        let storageRef = storage.reference(withPath: "images/\(imageID).jpg")
-        guard let imageData = image.jpegData(compressionQuality: 0.75) else { return }
-        let uploadMetadata = StorageMetadata.init()
-        uploadMetadata.contentType = "image/jpeg"
-        storageRef.putData(imageData)
-        
-        var ref: DocumentReference? = nil
-        ref = db.collection("images").addDocument(data: ["image": imageID, "timestamp": dbtimeStammp]) {
-            err in
-            if let err  = err {
-                print("Error adding document: \(err)")
-            } else {
-                print("Document added with ID: \(ref!.documentID)")
-            }
-        }
-    }
-    
-   
 }
