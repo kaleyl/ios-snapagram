@@ -99,6 +99,13 @@ class FeedViewController: UIViewController, UICollectionViewDelegate, UICollecti
             cell.timeLabel.text = formatDate(date: currentPost.date)
             cell.posterLabel.text = currentPost.user
             cell.captionLabel.text = currentPost.caption
+            
+            cell.backgroundColor = UIColor.clear
+            cell.layer.borderColor = UIColor.gray.cgColor
+            cell.layer.borderWidth = 1
+            cell.layer.cornerRadius = 8
+            cell.clipsToBounds = true
+            
             return cell
         }
         return UITableViewCell()

@@ -377,7 +377,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Create new thread!">
-                                    <color key="titleColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
                                     <action selector="newThreadButtonPressed:" destination="3wQ-Ib-xCX" eventType="touchUpInside" id="7vm-u5-HzO"/>
